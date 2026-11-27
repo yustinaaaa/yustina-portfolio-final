@@ -1,0 +1,67 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@theme inline {
+  --radius-lg: var(--radius);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-border: var(--border);
+  --color-card-a: var(--card-a);
+  --color-card-b: var(--card-b);
+  --color-card-strip: var(--card-strip);
+  --color-card-ink: var(--card-ink);
+  --font-sans: "Roboto Flex", "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Cormorant Garamond", "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+:root {
+  --radius: 0.75rem;
+  --background: oklch(0.985 0.004 20);
+  --foreground: oklch(0.14 0 0);
+  --primary: oklch(0.6 0.24 27);
+  --primary-foreground: oklch(0.99 0 0);
+  --muted: oklch(0.94 0.006 20);
+  --muted-foreground: oklch(0.45 0 0);
+  --accent: oklch(0.6 0.24 27);
+  --border: oklch(0.14 0 0);
+  --card-a: oklch(0.72 0.2 10);
+  --card-b: oklch(0.85 0.12 20);
+  --card-strip: oklch(0.88 0.13 150);
+  --card-ink: oklch(0.99 0 0);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  body { background: var(--color-background); color: var(--color-foreground); font-family: var(--font-sans); }
+}
+
+@utility font-wide { font-stretch: 125%; font-variation-settings: "wdth" 125; }
+@utility font-condensed { font-stretch: 40%; font-variation-settings: "wdth" 40; }
+@utility serif-up { font-family: var(--font-serif); text-transform: uppercase; font-weight: 500; }
+
+@utility flip-scene { perspective: 1600px; }
+@utility flip-inner {
+  transform-style: preserve-3d;
+  transition: transform 0.9s cubic-bezier(.2,.8,.2,1);
+}
+@utility flip-face { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+@utility flip-back { transform: rotateY(180deg); }
+@utility card-gloss {
+  background:
+    radial-gradient(120% 80% at 80% 10%, oklch(1 0 0 / 0.45), transparent 50%),
+    linear-gradient(135deg, var(--card-a), var(--card-b));
+  box-shadow: 0 30px 60px -20px oklch(0.6 0.24 27 / 0.45), inset 0 0 0 1px oklch(1 0 0 / 0.4);
+}
+@utility photo-duotone { filter: grayscale(1) contrast(1.1); mix-blend-mode: multiply; }
+
+@keyframes float { 0%,100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-10px) rotate(-2deg); } }
+@utility animate-float { animation: float 6s ease-in-out infinite; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+@utility animate-marquee { animation: marquee 30s linear infinite; }
